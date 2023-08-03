@@ -40,11 +40,11 @@ class User(db.Model):
         return check_password_hash(self._password_hash, password)
 
     def is_password_valid(password: str) -> bool:
-        # TODO: add an evaluator
+        # TODO.txt: add an evaluator
         return len(password) > 4
 
     def is_valid_email(email: str) -> bool:
-        # TODO: add an evaluator
+        # TODO.txt: add an evaluator
         return "@" in email
 
     ####

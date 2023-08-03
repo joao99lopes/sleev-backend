@@ -10,7 +10,7 @@
  - `docker exec -it flask-on-docker_web_1 /bin/bash`
 
 ## **CONNECT TO RUNNING DB DOCKER CONTAINER**
- - `docker-compose exec db psql --username=hello_flask --dbname=hello_flask_dev`
+ - `docker-compose exec db psql --username=postgres --dbname=sleev_db_dev`
 
 
 
