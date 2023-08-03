@@ -1,0 +1,8 @@
+Flask==2.3.2
+Flask-SQLAlchemy==3.0.3
+Flask-Migrate==2.5.2
+Flask-Admin==1.5.3
+flask-restplus==0.11.0
+psycopg2-binary==2.9.6
+gunicorn==20.1.0
+watchdog==2.1.3

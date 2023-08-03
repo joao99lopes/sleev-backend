@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  web:
+    build: ./services/web
+    command: gunicorn --bind 0.0.0.0:5000 --reload project:app
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+
+  nginx:
+    build: ./services/nginx
+    depends_on: 
+      - web

@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  web:
+    build: 
+      dockerfile: Dockerfile.dev
+    volumes:
+      - app_data:/usr/src/app/
+    expose:
+      - 5000
+    env_file:
+      - ./.env.dev
+  db:
+    volumes:
+      - postgres_data_dev:/var/lib/postgresql/data/
+    env_file:
+      - ./.env.dev
+  nginx:
+    build: ./services/nginx
+    volumes:
+      - ./services/nginx/:/usr/src/app/
+    ports:
+      - 1338:80
+
+volumes:
+  app_data:
+  postgres_data_dev:
