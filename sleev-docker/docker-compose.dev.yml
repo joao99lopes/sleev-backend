@@ -12,7 +12,7 @@ services:
       - ./.env.dev
   db:
     volumes:
-      - sleev_postgres_data_dev:/var/lib/postgresql/data/
+      - postgres_data_dev:/var/lib/postgresql/data/
     env_file:
       - ./.env.dev
   nginx:
@@ -24,4 +24,4 @@ services:
 
 volumes:
   app_data:
-  sleev_postgres_data_dev:
+  postgres_data_dev:
