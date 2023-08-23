@@ -107,8 +107,8 @@ def migrate_users():
     try:
         users = db.session.query(User)
         for u in users:
-            u.admin = False
-            u.superadmin = False
+            u.is_admin = False
+            u.is_super_admin = False
             u.token = User.generate_token()
         db.session.commit()
         
@@ -117,6 +117,7 @@ def migrate_users():
             "success": True,
             "data": ''
         }), 200
+        
     except Exception as e:
         db.session.rollback()
         return jsonify({

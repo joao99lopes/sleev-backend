@@ -1,7 +1,7 @@
 import requests
 from datetime import datetime
 
-url = 'http://127.0.0.1:1338/user/new'  # Replace with your Flask server URL
+url = 'http://127.0.0.1:1338/user/migrate'  # Replace with your Flask server URL
 add_user_data = {
     'first_name': 'tttt', 
     'last_name': 'Lopes', 
@@ -15,7 +15,8 @@ add_user_data = {
     
 delete_user_data = {'email': 'alice_inwasfonderland@test.com'}
 
-response = requests.post(url, json=add_user_data)
+#response = requests.post(url, json=add_user_data)
+response = requests.post(url)
 
 print(response.status_code)  # Get the HTTP status code of the response
 print(response.json())

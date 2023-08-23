@@ -25,7 +25,7 @@ class User(db.Model):
     _section = db.Column('section', db.Integer, nullable=False) #secção
     _team = db.Column('team', db.String(128))
     _role = db.Column('role', db.String(128), default='scout')
-    _token = db.Column('token', db.String(128), nullable=False)
+    _token = db.Column('token', db.String(128))
 
     # relationships
     progress = db.relationship('Progress', back_populates='_scout', foreign_keys=[Progress._scout_id])
@@ -49,7 +49,7 @@ class User(db.Model):
         self._scout_group = scout_group
         self._section = section
         self._role = role
-        self._token = generate_token()
+        self._token = User.generate_token()
 
     def __str__(self) -> str:
         return f"User: id={self.id}, " \

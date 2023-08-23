@@ -39,5 +39,5 @@ def delete_all():
     return delete_all_users()
 
 @users_blueprint.route("/migrate", methods=['POST'])
-def migrate_users():
+def migrate():
     return migrate_users()
