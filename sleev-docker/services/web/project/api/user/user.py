@@ -101,3 +101,27 @@ def delete_user(email: str) -> json:
         "success": True,
         "data": user.to_dict()
     }), 200
+
+
+def migrate_users():
+    try:
+        users = db.session.query(User)
+        for u in users:
+            u.admin = False
+            u.superadmin = False
+            u.token = User.generate_token()
+        db.session.commit()
+        
+        return jsonify({
+            "msg": "Users migrated successfully",
+            "success": True,
+            "data": ''
+        }), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({
+            "msg": "",
+            "error": e.__str__(),
+            "success": False,
+            "data": ""
+        }), 409
