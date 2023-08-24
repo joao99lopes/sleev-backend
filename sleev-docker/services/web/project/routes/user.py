@@ -5,7 +5,7 @@ from project.api.user import *
 from . import users_blueprint
 
 
-@users_blueprint.route("/new", methods=['POST'])
+@users_blueprint.route("/register", methods=['POST'])
 def new_user():
     try:
         data = request.get_json()
@@ -41,3 +41,18 @@ def delete_all():
 @users_blueprint.route("/migrate", methods=['POST'])
 def migrate():
     return migrate_users()
+
+@users_blueprint.route("/login", methods=['POST'])
+def login():    
+    try:
+        data = request.get_json()
+        email = data.get('email')
+        password_string = data.get('password')
+    except ValueError as e:
+        return jsonify({
+            "msg": "An error occurred retrieving data from json",
+            "error": e.__str__(),
+            "success": False,
+            "data": ""
+        }), 400
+    return login_user(email=email, password=password_string)

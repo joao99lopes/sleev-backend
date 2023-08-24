@@ -225,7 +225,7 @@ class User(db.Model):
         import secrets
         import string
         
-        length:int = 16
-        characters = string.ascii_letters + string.digits + string.punctuation
+        length:int = 32
+        characters = string.ascii_letters + string.digits
         random_string = ''.join(secrets.choice(characters) for _ in range(length))
         return random_string

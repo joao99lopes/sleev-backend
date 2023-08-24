@@ -126,3 +126,38 @@ def migrate_users():
             "success": False,
             "data": ""
         }), 409
+
+
+def login_user(email: str, password: str) -> json:
+    if not validate_email(email):
+        return jsonify({
+            "msg": "",
+            "error": "email is invalid",
+            "success": False,
+            "data": ""
+        }), 409
+
+    user: User = get_last_user_by_email(email_str=email)  
+    if (user is None or user.deleted_at is not None):
+        return jsonify({
+            "msg": "",
+            "error": "user not found",
+            "success": False,
+            "data": ""
+        }), 409
+
+    if not (validate_password(password) and check_password(user=user, password=password)):
+        return jsonify({
+            "msg": "",
+            "error": "invalid password",
+            "success": False,
+            "data": ""
+        }), 409
+        
+    
+    return jsonify({
+        "msg": "User fetched successfully",
+        "success": True,
+        "data": user.to_dict()
+    }), 200
+
