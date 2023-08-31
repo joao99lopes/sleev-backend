@@ -1,6 +1,6 @@
 import os
 
-from flask import Flask, jsonify, Blueprint
+from flask import Flask, jsonify
 from flask_migrate import Migrate
 
 app = Flask(__name__)
@@ -10,12 +10,15 @@ migrate = Migrate()
 
 # Initialize Flask extensions here
 from project.routes import users_blueprint
+#api_blueprint: Blueprint = Blueprint("api", "api", url_prefix="/api")
+# api_blueprint.register_blueprint(blueprint=users_blueprint)
+
+# app.register_blueprint(blueprint=api_blueprint)
+
+app.register_blueprint(blueprint=users_blueprint)
+
 
 # Register blueprints here
-api_blueprint: Blueprint = Blueprint("api", "api", url_prefix="/api")
-api_blueprint.register_blueprint(blueprint=users_blueprint)
-
-app.register_blueprint(blueprint=api_blueprint)
 
 
 # App main route
