@@ -25,7 +25,7 @@ class User(db.Model):
     _section = db.Column('section', db.Integer, nullable=False) #secção
     _team = db.Column('team', db.String(128))
     _role = db.Column('role', db.String(128), default='scout')
-    _token = db.Column('token', db.String(128))
+    _auth_token = db.Column('auth_token', db.String(128))
 
     # relationships
     progress = db.relationship('Progress', back_populates='_scout', foreign_keys=[Progress._scout_id])
@@ -49,7 +49,7 @@ class User(db.Model):
         self._scout_group = scout_group
         self._section = section
         self._role = role
-        self._token = User.generate_token()
+        self._auth_token = User.generate_token()
 
     def __str__(self) -> str:
         return f"User: id={self.id}, " \
@@ -149,8 +149,8 @@ class User(db.Model):
         return self._is_super_admin
 
     @hybrid_property
-    def token(self) -> str:
-        return self._token
+    def auth_token(self) -> str:
+        return self._auth_token
 
 
     ####
@@ -209,9 +209,9 @@ class User(db.Model):
     def is_super_admin(self, is_super_admin:bool) -> None:
         self._is_super_admin = is_super_admin
         
-    @token.setter
-    def token(self, token:str) -> None:
-        self._token = token
+    @auth_token.setter
+    def auth_token(self, auth_token:str) -> None:
+        self._auth_token = auth_token
         
 
     ####

@@ -109,7 +109,7 @@ def migrate_users():
         for u in users:
             u.is_admin = False
             u.is_super_admin = False
-            u.token = User.generate_token()
+            u.auth_token = User.generate_token()
         db.session.commit()
         
         return jsonify({
